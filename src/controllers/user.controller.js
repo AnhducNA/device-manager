@@ -1,15 +1,11 @@
-const User = require("../models/users.model");
+const userService = require("../services/user.service");
 // Controller method to get all todos
 exports.getAllUser = async (req, res) => {
-  console.log(12456);
-
   try {
-    const data = await User.findAll({
-      attributes: { exclude: ["updated_at"] },
-    });
-    res.json(data);
+    const data = await userService.getAllData();
+    res.status(200).json(data);
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    return res.status(500).json({ error: "user.controller.fail" });
   }
 };
 // Controller method to create a new todo
