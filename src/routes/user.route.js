@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/user.controller");
 // Route to get all todos
-router.get("/", userController.getAllUser);
+router.get("/list", userController.getAllUser);
 // Route to create a new todo
 router.post("/", userController.createTodo);
 // Route to get a todo by ID
