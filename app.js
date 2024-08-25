@@ -40,7 +40,7 @@ app.use(express.urlencoded({ extended: true }));
 initRoute(app);
 
 // simple route
-app.get("/", cors(corsOptions), (req, res) => {
+app.get("/", (req, res) => {
   res.json({ message: "Welcome to application." });
 });
 
