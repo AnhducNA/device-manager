@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === "production") {
     origin: (origin, callback) => {
       var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
       console.log("ORIGIN: ", origin); // => undefined
-      callback(originIsWhitelisted ? null : "Bad Request", originIsWhitelisted);
+      callback(originIsWhitelisted ? null : "Error CorsOptions Bad Request", originIsWhitelisted);
     },
     credentials: true,
   };

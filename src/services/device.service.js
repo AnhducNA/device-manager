@@ -5,7 +5,8 @@ exports.getAllData = async () => {
 };
 
 exports.getDetail = async (id) => {
-  return Device.findOne({ where: { id } });
+  const data = await Device.findOne({ where: { id } });
+  return data;
 };
 
 exports.createData = async (dataParams) => {

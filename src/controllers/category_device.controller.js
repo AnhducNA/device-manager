@@ -16,7 +16,7 @@ exports.getDetail = async (req, res) => {
     if (!data) {
       return res.status(400).json({ message: "do not have data" });
     }
-    return res.status(200).json(data);
+    return res.status(200).json({ status: 1, data });
   } catch (error) {
     return res.status(500).json({ error });
   }
@@ -31,7 +31,7 @@ exports.createData = async (req, res) => {
       online: body.online,
     };
     const data = await categoryDeviceService.createData(dataDto);
-    return res.status(200).json(data);
+    return res.status(200).json({ status: 1, data });
   } catch (error) {
     return res.status(500).json({ error });
   }

@@ -3,7 +3,7 @@ const userService = require("../services/user.service");
 exports.getAllUser = async (req, res) => {
   try {
     const data = await userService.getAllData();
-    res.status(200).json(data);
+    return res.status(200).json({ status: 1, data });
   } catch (error) {
     return res.status(500).json({ error: "user.controller.fail" });
   }
@@ -18,7 +18,7 @@ exports.createTodo = async (req, res) => {
       percentCompleted,
       isCompleted,
     });
-    res.status(201).json(newTodo);
+    return res.status(200).json({ status: 1, data: newTodo });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
