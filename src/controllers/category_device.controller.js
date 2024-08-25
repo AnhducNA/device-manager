@@ -3,7 +3,7 @@ const categoryDeviceService = require("../services/category_device.service");
 exports.getAll = async (req, res) => {
   try {
     const data = await categoryDeviceService.getAllData();
-    res.status(200).json(data);
+    return res.status(200).json({ status: 1, data });
   } catch (error) {
     return res.status(500).json({ error });
   }
