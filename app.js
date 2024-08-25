@@ -15,7 +15,19 @@ sequelize
   .catch((error) => {
     console.error("Unable to connect to the database: ", error);
   });
-app.use(cors());
+
+// config cors
+const whitelist = ["http://localhost:3000", "http://localhost:5000"];
+const corsOptionsDelegate = function (req, callback) {
+  let corsOptions;
+  if (whitelist.indexOf(req.header("Origin")) !== -1) {
+    corsOptions = { origin: true }; // reflect (enable) the requested origin in the CORS response
+  } else {
+    corsOptions = { origin: false }; // disable CORS for this request
+  }
+  callback(null, corsOptions); // callback expects two parameters: error and options
+};
+app.use(cors(corsOptionsDelegate));
 
 // Middleware to parse JSON requests
 app.use(express.json());
@@ -27,7 +39,7 @@ app.use(express.urlencoded({ extended: true }));
 initRoute(app);
 
 // simple route
-app.get("/", (req, res) => {
+app.get("/", cors(corsOptions), (req, res) => {
   res.json({ message: "Welcome to application." });
 });
 
