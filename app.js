@@ -17,17 +17,18 @@ sequelize
   });
 
 // config cors
-const whitelist = ["http://localhost:3000", "http://localhost:5000"];
-const corsOptionsDelegate = function (req, callback) {
-  let corsOptions;
-  if (whitelist.indexOf(req.header("Origin")) !== -1) {
-    corsOptions = { origin: true }; // reflect (enable) the requested origin in the CORS response
-  } else {
-    corsOptions = { origin: false }; // disable CORS for this request
-  }
-  callback(null, corsOptions); // callback expects two parameters: error and options
-};
-app.use(cors(corsOptionsDelegate));
+if (process.env.NODE_ENV === "production") {
+  var whitelist = ["http://localhost:3000", "http://localhost:5000"];
+  var corsOptions = {
+    origin: (origin, callback) => {
+      var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+      console.log("ORIGIN: ", origin); // => undefined
+      callback(originIsWhitelisted ? null : "Bad Request", originIsWhitelisted);
+    },
+    credentials: true,
+  };
+  app.use(cors(corsOptions));
+}
 
 // Middleware to parse JSON requests
 app.use(express.json());
