@@ -20,7 +20,14 @@ exports.login = async (loginParams = { email: "", password: "" }) => {
     throw new Error("Mật khẩu không đúng");
   }
   const tokenAccess = await this.generateToken({ userId: userLogin.id });
-  return { tokenAccess, userLogin: userLogin.id };
+  return {
+    tokenAccess,
+    userLogin: {
+      id: userLogin.id,
+      name: userLogin.name,
+      email: userLogin.email,
+    },
+  };
 };
 
 exports.register = async (
