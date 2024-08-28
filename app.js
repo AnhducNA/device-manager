@@ -18,12 +18,19 @@ sequelize
 
 // config cors
 if (process.env.NODE_ENV === "production") {
-  var whitelist = ["http://localhost:3000", "http://localhost:5000"];
+  var whitelist = [
+    "http://localhost:3000",
+    "http://localhost:5000",
+    "https://device-manager-zuvh.onrender.com/",
+  ];
   var corsOptions = {
     origin: (origin, callback) => {
       var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
       console.log("ORIGIN: ", origin); // => undefined
-      callback(originIsWhitelisted ? null : "Error CorsOptions Bad Request", originIsWhitelisted);
+      callback(
+        originIsWhitelisted ? null : "Error CorsOptions Bad Request",
+        originIsWhitelisted
+      );
     },
     credentials: true,
   };
