@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const User = require("../models/user.model");
 const UserService = require("../services/user.service");
 const { JWT_SECRET_KEY } = require("../config/config");
-const saltRounds = 10;
 
 exports.login = async (loginParams = { email: "", password: "" }) => {
   const userLogin = await UserService.getUserByEmail(loginParams.email);
@@ -26,6 +25,7 @@ exports.login = async (loginParams = { email: "", password: "" }) => {
       id: userLogin.id,
       name: userLogin.name,
       email: userLogin.email,
+      role: userLogin.role,
     },
   };
 };
