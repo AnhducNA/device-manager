@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === "production") {
   var whitelist = [
     "http://localhost:3000",
     "http://localhost:5000",
-    "https://device-manager-zuvh.onrender.com/",
+    "https://device-manager-zuvh.onrender.com",
   ];
   var corsOptions = {
     origin: (origin, callback) => {
