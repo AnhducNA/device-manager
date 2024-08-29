@@ -20,7 +20,7 @@ sequelize
 if (process.env.NODE_ENV === "production") {
   var whitelist = [
     "http://localhost:3000",
-    "http://localhost:5000",
+    "https://mesx.vercel.app",
     "https://device-manager-zuvh.onrender.com",
   ];
   var corsOptions = {
