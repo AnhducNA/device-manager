@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../models/user.model");
-const UserService = require("../services/user.service");
+const UserService = require("./user.service");
 const { JWT_SECRET_KEY } = require("../config/config");
 
 exports.login = async (loginParams = { email: "", password: "" }) => {

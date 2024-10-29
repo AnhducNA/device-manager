@@ -16,42 +16,47 @@ sequelize
     console.error("Unable to connect to the database: ", error);
   });
 
-// config cors
-if (process.env.NODE_ENV === "production") {
-  var whitelist = [
-    "http://localhost:3000",
-    "https://mesx.vercel.app",
-    "https://device-manager-zuvh.onrender.com",
-  ];
-  var corsOptions = {
-    origin: (origin, callback) => {
-      var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
-      console.log("ORIGIN: ", origin); // => undefined
-      callback(
-        originIsWhitelisted ? null : "Error CorsOptions Bad Request",
-        originIsWhitelisted
-      );
-    },
-    credentials: true,
-  };
-  app.use(cors(corsOptions));
-}
+// // config cors
+// if (process.env.NODE_ENV === "production") {
+//   var whitelist = [
+//     "http://localhost:3000",
+//     "https://mesx.vercel.app",
+//     "https://device-manager-zuvh.onrender.com",
+//   ];
+//   var corsOptions = {
+//     origin: (origin, callback) => {
+//       var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+//       console.log("ORIGIN: ", origin); // => undefined
+//       callback(
+//         originIsWhitelisted ? null : "Error CorsOptions Bad Request",
+//         originIsWhitelisted
+//       );
+//     },
+//     credentials: true,
+//   };
+//   app.use(cors(corsOptions));
+// }
 
-// Middleware to parse JSON requests
-app.use(express.json());
+// // Middleware to parse JSON requests
+// app.use(express.json());
 
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
+// // parse requests of content-type - application/x-www-form-urlencoded
+// app.use(express.urlencoded({ extended: true }));
 
 // Routes
-initRoute(app);
+// initRoute(app);
 
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to application." });
-});
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}`);
+// });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+const start = async () => {
+  require("dotenv").config;
+  require("module-alias/register");
+  require("./src/server/express").listen();
+  require("./src/server/socket").listen();
+  require("./src/routes");
+};
+
+start();
